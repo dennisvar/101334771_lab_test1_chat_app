@@ -29,20 +29,18 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`Server started on port ${process.env.PORT}`);
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(`${__dirname}/pages/index.html`);
-});
-
-app.get("/login", (req, res) => {
-  res.sendFile(`${__dirname}/pages/login.html`);
-});
-
-app.get("/signup", (req, res) => {
-  res.sendFile(`${__dirname}/pages/signup.html`);
-});
+// Socket.io funcs
 
 const io = new Server(server);
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("chat", (msg) => {
+    io.emit("chat", { message: msg, id: socket.id });
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
