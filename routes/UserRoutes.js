@@ -4,7 +4,7 @@ import User from "../models/User.js";
 const app = Router();
 
 // add a user
-app.get("/signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, firstname, lastname, email, password } = req.body;
 
   const newUser = new User({
@@ -27,6 +27,7 @@ app.get("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
+  console.log(username, password);
   try {
     const foundUser = User.find({
       username: username,
