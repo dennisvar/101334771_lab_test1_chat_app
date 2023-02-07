@@ -1,16 +1,22 @@
 import mongoose from "mongoose";
 
-const roomMessageSchema = new mongoose.Schema({
-  message: {
-    type: String,
+const roomMessageSchema = new mongoose.Schema(
+  {
+    message: {
+      type: String,
+    },
+    sender: {
+      type: String,
+    },
+    room: {
+      type: String,
+    },
   },
-  sender: {
-    type: String,
-  },
-  room: {
-    type: String,
-  },
-  timestamps: true,
-});
+  { timestamps: true }
+);
 
-export default mongoose.model("RoomMessage", roomMessageSchema);
+export default mongoose.model(
+  "RoomMessages",
+  roomMessageSchema,
+  "RoomMessages"
+);

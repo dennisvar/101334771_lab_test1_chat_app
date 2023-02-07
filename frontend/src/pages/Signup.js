@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [username, setUsername] = React.useState("");
@@ -7,18 +8,35 @@ export default function Signup() {
   const [firstname, setFirstname] = React.useState("");
   const [lastname, setLastname] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.get("/api/users").then((res) => {
-      console.log(res.data);
-    });
+  const handleSubmit = () => {
+    axios
+      .post("http://localhost:4000/api/users/signup", {
+        username,
+        password,
+        firstname,
+        lastname,
+        email,
+      })
+      .then((res) => {
+        if (!res.data) {
+          console.log("Signup Successful");
+          navigate("/login");
+        } else {
+          console.log("Account not found");
+          setEmail("");
+          setPassword("");
+          setFirstname("");
+          setLastname("");
+          setEmail("");
+        }
+      });
   };
-
   return (
     <div>
       <h1>Signup</h1>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>
           Username:
           <input
@@ -59,7 +77,9 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <button type="submit">Signup</button>
+        <button type="submit" value="submit" onClick={() => handleSubmit()}>
+          Signup
+        </button>
       </form>
     </div>
   );

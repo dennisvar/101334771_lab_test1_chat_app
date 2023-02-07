@@ -1,16 +1,22 @@
 import mongoose from "mongoose";
 
-const privateMessageSchema = new mongoose.Schema({
-  message: {
-    type: String,
+const privateMessageSchema = new mongoose.Schema(
+  {
+    message: {
+      type: String,
+    },
+    sender: {
+      type: String,
+    },
+    receiver: {
+      type: String,
+    },
   },
-  sender: {
-    type: String,
-  },
-  receiver: {
-    type: String,
-  },
-  timestamps: true,
-});
+  { timestamps: true }
+);
 
-export default mongoose.model("PrivateMessage", privateMessageSchema);
+export default mongoose.model(
+  "PrivateMessages",
+  privateMessageSchema,
+  "PrivateMessages"
+);

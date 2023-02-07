@@ -4,11 +4,16 @@ import User from "../models/User.js";
 const app = Router();
 
 // add a user
-
-app.post("/signup", async (req, res) => {
+app.get("/signup", async (req, res) => {
   const { username, firstname, lastname, email, password } = req.body;
 
-  const newUser = new User({ username, firstname, lastname, email, password });
+  const newUser = new User({
+    username: username,
+    firstname: firstname,
+    lastname: lastname,
+    email: email,
+    password: password,
+  });
 
   try {
     await newUser.save();
@@ -23,7 +28,9 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const foundUser = User.find({ username, password });
+    const foundUser = User.find({
+      username: username,
+    });
     if (foundUser && foundUser.password === password) {
       res.status(200).json({ message: "User logged in successfully" });
     } else {

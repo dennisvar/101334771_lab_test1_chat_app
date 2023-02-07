@@ -4,7 +4,6 @@ import RoomMessage from "../models/RoomMessage.js";
 const app = Router();
 
 // get all room messages by room
-
 app.get("/all", async (req, res) => {
   try {
     const roomMessages = await RoomMessage.find({

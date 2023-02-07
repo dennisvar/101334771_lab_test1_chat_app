@@ -2,12 +2,10 @@
 import Express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 import { Server } from "socket.io";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import UserRoutes from "./routes/UserRoutes.js";
+import PrivateMessageRoutes from "./routes/PrivateMessageRoutes.js";
+import RoomMessageRoutes from "./routes/RoomMessageRoutes.js";
 
 const app = Express();
 dotenv.config();
@@ -28,6 +26,14 @@ mongoose
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server started on port ${process.env.PORT}`);
 });
+
+app.use("/", (req, res) => {
+  res.redirect("http://localhost:3000");
+});
+
+app.use("/api/users", UserRoutes);
+app.use("/api/privateMessages", PrivateMessageRoutes);
+app.use("/api/roomMessages", RoomMessageRoutes);
 
 // Socket.io funcs
 
