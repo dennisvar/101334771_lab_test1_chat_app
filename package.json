@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run start\" \"npm run client\" "
   },
   "keywords": [],
   "author": "",
@@ -17,6 +19,7 @@
     "socket.io": "^4.6.0"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "nodemon": "^2.0.20"

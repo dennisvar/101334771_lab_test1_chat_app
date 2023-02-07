@@ -5,7 +5,7 @@ const app = Router();
 
 // add a user
 
-app.post("/signup-add", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, firstname, lastname, email, password } = req.body;
 
   const newUser = new User({ username, firstname, lastname, email, password });
@@ -19,7 +19,7 @@ app.post("/signup-add", async (req, res) => {
 });
 
 // login a user
-app.post("/login-check", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
